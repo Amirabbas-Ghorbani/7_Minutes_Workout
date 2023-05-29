@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.widget.Toast
+import androidx.core.graphics.green
 import ghorbani.amir.a7minutesworkout.databinding.ActivityExerciseBinding
 
 class ExerciseActivity : AppCompatActivity() {
@@ -11,6 +12,9 @@ class ExerciseActivity : AppCompatActivity() {
     private var binding : ActivityExerciseBinding? = null
     private var restTimer : CountDownTimer? = null
     private var restProgress = 0
+
+    private var exerciseList : ArrayList<ExerciseModel>? = null
+    private var currentExercisePosition = -1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,6 +30,8 @@ class ExerciseActivity : AppCompatActivity() {
         binding?.toolbarExercise?.setNavigationOnClickListener {
             onBackPressed()
         }
+
+        exerciseList = Constants.defaultExerciseList()
 
         setupRestView()
     }
@@ -49,11 +55,12 @@ class ExerciseActivity : AppCompatActivity() {
             override fun onFinish() {
                 Toast.makeText(this@ExerciseActivity, "Now we start the exercise",
                     Toast.LENGTH_LONG).show()
+                currentExercisePosition++
                 when(restProgress){
                     10 -> restTimer?.let {
                         restProgress = 0
                         binding?.progressBar?.max = 30
-                        binding?.tvTitle?.text = "EXERCISE NAME"
+                        binding?.tvTitle?.text = "Exercise Name"
                         object : CountDownTimer(30000, 1000){
                             override fun onTick(millisUntilFinished: Long) {
                                 restProgress++
