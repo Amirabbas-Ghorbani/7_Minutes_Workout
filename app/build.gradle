@@ -8,6 +8,7 @@ android {
     compileSdk 33
 
     defaultConfig {
+        compileSdkPreview = "UpsideDownCake"
         applicationId "ghorbani.amir.a7minutesworkout"
         minSdk 24
         targetSdk 33
