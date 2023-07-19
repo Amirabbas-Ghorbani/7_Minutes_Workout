@@ -3,7 +3,9 @@ package ghorbani.amir.a7minutesworkout
 object Constants {
 
     fun defaultExerciseList() : ArrayList<ExerciseModel>{
+
         val exerciseList = ArrayList<ExerciseModel>()
+
         val jumpingJacks = ExerciseModel(
             1,
         "Jumping Jacks",
